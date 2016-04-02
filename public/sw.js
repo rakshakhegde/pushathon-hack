@@ -1,5 +1,9 @@
 importScripts('https://cdn.firebase.com/js/client/2.4.0/firebase.js');
 rootRef = new Firebase('https://sbscrb.firebaseio.com/');
+rootRef.child('post').on('child_changed', function(snap) {
+	console.log('New outer post:', snap.val());
+	showNotif(snap);
+});
 var channelNames = []
 rootRef.child('channelTypes').once('value', function(snap) {
 	snap.val().forEach(function(channelType) {
